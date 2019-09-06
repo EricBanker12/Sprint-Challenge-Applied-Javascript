@@ -21,15 +21,16 @@
 axios.get('https://lambda-times-backend.herokuapp.com/articles').then(obj=>{
     //console.log(obj)
     let cardsContainer = document.querySelector('.cards-container')
-    for (let topic of Object.values(obj.data.articles)) {
-        let articles = topic.map(createCard)
+    for (let topic of Object.keys(obj.data.articles)) {
+        let articles = obj.data.articles[topic].map(createCard.bind(null, topic))
         cardsContainer.append(...articles)
     }
 })
 
-function createCard(article) {
+function createCard(topic, article) {
     // card
     let card = createElement('div', {className:'card'})
+    card.setAttribute('topic', topic)
     // headline
     let headline = createElement('div',{className:'headline', textContent:article.headline})
     // author

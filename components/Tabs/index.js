@@ -11,7 +11,20 @@
 axios.get('https://lambda-times-backend.herokuapp.com/topics').then(obj=>{
     //console.log(obj)
     let tabs = obj.data.topics.map(createTab)
-    document.querySelector('.topics').append(...tabs)
+    let topics = document.querySelector('.topics')
+    topics.append(...tabs)
+    // add filter
+    topics.addEventListener('click', event => {
+        let tab = event.target.closest('.tab')
+        for (let card of document.getElementsByClassName('card')) {
+            if (card.getAttribute('topic') == tab.textContent.replace('.js','')) {
+                card.removeAttribute('style')
+            }
+            else {
+                card.style.display = 'none'
+            }
+        }
+    })
 })
 
 function createTab(topic) {
