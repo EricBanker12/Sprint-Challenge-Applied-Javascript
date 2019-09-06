@@ -10,14 +10,6 @@
 // And add it to the DOM in the .header-container component
 
 function Header() {
-    // helper function
-    function createElement(tag, attributes={}) {
-        let temp = document.createElement(tag)
-        for (let attribute of Object.keys(attributes)) {
-            temp[attribute] = attributes[attribute]
-        }
-        return temp
-    }
     // header
     let header = createElement('div', {className:'header'})
     // date
@@ -28,7 +20,7 @@ function Header() {
     let temp = createElement('span', {textContent:'98°'})
     // append elements
     header.append(date,h1,temp)
-    
+
     return header
 }
 
